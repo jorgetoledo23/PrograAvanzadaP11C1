@@ -136,8 +136,12 @@ namespace ConsoleAppP11C1
                 Console.WriteLine(pais);
             }
 
+            paises.ForEach(x => Console.WriteLine(x));
+
+            paises.Find(x => x == "Chile");
 
 
+            
 
         }
 
