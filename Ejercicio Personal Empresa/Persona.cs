@@ -1,12 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 
-namespace Ejercicio1
+namespace Ejercicio_Personal_Empresa
 {
     public class Persona
     {
-        int contador;
         public string Rut { get; set; }
         public string Name { get; set; }
         public string Apellido { get; set; }
@@ -17,10 +18,13 @@ namespace Ejercicio1
         public Persona(string rut, string nombre, string apellido, int sueldo)
         {
             Rut = rut;
-            Name = nombre;  
+            Name = nombre;
             Apellido = apellido;
         }
 
-
+        public override string ToString()
+        {
+            return $"Empleado Rut: {Rut}, Nombre: {Name}, Apellido: {Apellido}, Sueldo: {Sueldo}";
+        }
     }
 }
