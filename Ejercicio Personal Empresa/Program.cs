@@ -8,16 +8,7 @@
  * Apellido,
  * Sueldo
  */
-
-
 using Ejercicio_Personal_Empresa;
-
-Console.BackgroundColor = ConsoleColor.Cyan;
-Console.ForegroundColor = ConsoleColor.Blue;
-Console.SetCursorPosition(50, 3);
-Console.WriteLine("Sistema de Ingreso de Empleados");
-Console.BackgroundColor = ConsoleColor.Black;
-Console.ForegroundColor = ConsoleColor.White;
 
 char opcion;
 List<Persona> listaPersonal = new List<Persona>();
@@ -25,29 +16,28 @@ List<Persona> listaPersonal = new List<Persona>();
 
 do
 {
-    Console.Clear();
+    //Console.Clear();
     Console.WriteLine("1 - Ingreso de Empleados ");
     Console.WriteLine("2 - Listar Empleados ");
     Console.WriteLine("3 - Salir del Sistema ");
 
     Console.Write("Selecciona una Opcion: ");
-    opcion = Convert.ToChar(Console.Read());
+    opcion = Convert.ToChar(Console.ReadLine());
 
     if (opcion.Equals('1'))
     {
         //Ingresar Empleados
         Console.Clear();
-
-        Console.WriteLine("Rut: ");
+        Console.Write("Rut: ");
         string? rut = Console.ReadLine();
 
-        Console.WriteLine("Nombre: ");
+        Console.Write("Nombre: ");
         string? nombre = Console.ReadLine();
 
-        Console.WriteLine("Apellido: ");
+        Console.Write("Apellido: ");
         string? ape = Console.ReadLine();
 
-        Console.WriteLine("Sueldo: ");
+        Console.Write("Sueldo: ");
         int sueldo = Convert.ToInt32(Console.ReadLine());
 
         Persona P = new Persona(rut, nombre, ape, sueldo);
