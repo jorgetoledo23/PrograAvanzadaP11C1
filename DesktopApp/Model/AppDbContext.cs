@@ -15,5 +15,16 @@ namespace DesktopApp.Model
             optionsBuilder.UseSqlServer("Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=DesktopAppP11C1;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False");
         }
 
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            //API FLUENT 
+            base.OnModelCreating(modelBuilder);
+
+            //modelBuilder.Entity<Empleado>().HasKey(emp => emp.Rut);
+            modelBuilder.Entity<Empleado>().
+                Property(emp => emp.FechaNacimiento).HasColumnType("date");
+        }
+        public DbSet<Empleado> Empleados { get; set; }
+
     }
 }

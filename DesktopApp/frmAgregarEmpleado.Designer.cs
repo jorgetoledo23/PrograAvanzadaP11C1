@@ -29,6 +29,8 @@
         private void InitializeComponent()
         {
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.label6 = new System.Windows.Forms.Label();
+            this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
             this.btnAgregar = new System.Windows.Forms.Button();
             this.rbContratista = new System.Windows.Forms.RadioButton();
             this.rbReponedor = new System.Windows.Forms.RadioButton();
@@ -48,6 +50,8 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.label6);
+            this.groupBox1.Controls.Add(this.dateTimePicker1);
             this.groupBox1.Controls.Add(this.btnAgregar);
             this.groupBox1.Controls.Add(this.rbContratista);
             this.groupBox1.Controls.Add(this.rbReponedor);
@@ -70,6 +74,23 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Informacion del Empleado";
             // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(50, 314);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(144, 20);
+            this.label6.TabIndex = 15;
+            this.label6.Text = "Fecha Nacimiento";
+            // 
+            // dateTimePicker1
+            // 
+            this.dateTimePicker1.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+            this.dateTimePicker1.Location = new System.Drawing.Point(200, 309);
+            this.dateTimePicker1.Name = "dateTimePicker1";
+            this.dateTimePicker1.Size = new System.Drawing.Size(161, 27);
+            this.dateTimePicker1.TabIndex = 14;
+            // 
             // btnAgregar
             // 
             this.btnAgregar.Location = new System.Drawing.Point(27, 360);
@@ -78,10 +99,12 @@
             this.btnAgregar.TabIndex = 13;
             this.btnAgregar.Text = "Agregar Empleado";
             this.btnAgregar.UseVisualStyleBackColor = true;
+            this.btnAgregar.Click += new System.EventHandler(this.btnAgregar_Click);
             // 
             // rbContratista
             // 
             this.rbContratista.AutoSize = true;
+            this.rbContratista.Enabled = false;
             this.rbContratista.Location = new System.Drawing.Point(297, 264);
             this.rbContratista.Name = "rbContratista";
             this.rbContratista.Size = new System.Drawing.Size(112, 24);
@@ -93,6 +116,7 @@
             // rbReponedor
             // 
             this.rbReponedor.AutoSize = true;
+            this.rbReponedor.Enabled = false;
             this.rbReponedor.Location = new System.Drawing.Point(164, 264);
             this.rbReponedor.Name = "rbReponedor";
             this.rbReponedor.Size = new System.Drawing.Size(111, 24);
@@ -104,6 +128,7 @@
             // rbVendedor
             // 
             this.rbVendedor.AutoSize = true;
+            this.rbVendedor.Enabled = false;
             this.rbVendedor.Location = new System.Drawing.Point(41, 264);
             this.rbVendedor.Name = "rbVendedor";
             this.rbVendedor.Size = new System.Drawing.Size(101, 24);
@@ -226,5 +251,7 @@
         private Label label4;
         private TextBox txtApellidos;
         private Label label3;
+        private Label label6;
+        private DateTimePicker dateTimePicker1;
     }
 }

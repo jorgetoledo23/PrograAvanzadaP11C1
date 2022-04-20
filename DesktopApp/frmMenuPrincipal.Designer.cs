@@ -89,6 +89,7 @@
             this.MenuItemAgregarEmpleado.Name = "MenuItemAgregarEmpleado";
             this.MenuItemAgregarEmpleado.Size = new System.Drawing.Size(224, 26);
             this.MenuItemAgregarEmpleado.Text = "Agregar Empleado";
+            this.MenuItemAgregarEmpleado.Click += new System.EventHandler(this.MenuItemAgregarEmpleado_Click);
             // 
             // MenuItemEditarEmpleado
             // 

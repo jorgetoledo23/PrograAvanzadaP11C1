@@ -5,13 +5,13 @@ namespace ConsoleAppP11C1
 {
     public class Program
     {
-        void Main(string[] args)
+        public static void Main(string[] args)
         {
             Console.WriteLine("Hello World!");
             //Console.WriteLine("Jorge", "Toledo");
             Console.Write("Ingresa tu Nombre: ");
             var nombrePersona = Console.ReadLine();
-            Console.WriteLine(Saludar(nombrePersona));  
+            //Console.WriteLine(Saludar(nombrePersona));  
 
             // Declaracion de Variables
             //tipoVariable nombreVariable = valorVariable
@@ -145,14 +145,7 @@ namespace ConsoleAppP11C1
 
         }
 
-        public string Saludar(string nombre)
-        {
-            return $"Hola {nombre}";
-        }
-        public string Saludar(string nombre, string apellido)
-        {
-            return $"Hola {nombre} {apellido}";
-        }
+        
 
         
 
