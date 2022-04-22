@@ -13,6 +13,7 @@ namespace DesktopApp
 {
     public partial class frmVerEmpleados : Form
     {
+        private int EmpleadoId;
         public frmVerEmpleados()
         {
             InitializeComponent();
@@ -58,6 +59,54 @@ namespace DesktopApp
                 listViewItem.SubItems.Add(Empleado.Telefono);
                 listViewItem.SubItems.Add(Empleado.FechaNacimiento.ToString("d"));
                 listView1.Items.Add(listViewItem);
+            }
+        }
+
+        private void listView1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            btnEdit.Enabled = true;
+            button1.Enabled = true;
+            //identificar el ID del empleado
+            if (listView1.SelectedItems.Count > 0)
+            {
+                ListViewItem item = listView1.SelectedItems[0];
+                EmpleadoId = Convert.ToInt32(item.Text);
+                //MessageBox.Show(IdEmpleado);
+            }
+
+            
+
+
+
+        }
+
+        private void btnEdit_Click(object sender, EventArgs e)
+        {
+            frmEditEmpleado frmEdit = new frmEditEmpleado(EmpleadoId);
+            frmEdit.ShowDialog();
+            listView1.Items.Clear();
+            using (var context = new AppDbContext())
+            {
+                var Empleados = context.Empleados.ToList();
+                LlenarLista(Empleados);
+            }
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            if (MessageBox.Show("¿Esta seguro de Eliminar al Empleado?", "Advertencia", MessageBoxButtons.OKCancel, MessageBoxIcon.Question) == DialogResult.OK)
+            {
+                //Eliminar
+                using (var context = new AppDbContext())
+                {
+                    var Emp = context.Empleados.Where(emp => emp.EmpleadoId == EmpleadoId).First();
+                    context.Remove(Emp);                  
+                    context.SaveChanges();
+                    listView1.Items.Clear();
+                    var Empleados = context.Empleados.ToList();
+                    LlenarLista(Empleados);
+                }
+
             }
         }
     }
