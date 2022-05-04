@@ -32,12 +32,60 @@ namespace API.Controllers
 
         [HttpPost]
         [Route("AddDepartment")]
-        public ActionResult AddDepartment(Departamento D)
+        public ActionResult AddDepartment(DepartamentoDTO D)
         {
-            _context.Add(D);
+            Departamento Dpto = new Departamento()
+            {
+                Id = D.Id,
+                CompanyNo = D.CompanyNo,
+                Descripcion = D.Descripcion
+            };
+            _context.Add(Dpto);
             _context.SaveChanges();
             return Ok();
         }
 
+        [HttpPut]
+        [Route("UptDepartment")]
+        public ActionResult UptDepartment(DepartamentoDTO D)
+        {
+            var Dpto = _context.Departamentos.FirstOrDefault(dpto => dpto.Id == D.Id);
+            if (Dpto == null) BadRequest();
+            else
+            {
+                Dpto.CompanyNo = D.CompanyNo;
+                Dpto.Descripcion = D.Descripcion;
+            }
+            _context.Update(Dpto);
+            _context.SaveChanges();
+            return Ok();
+        }
+
+
+        [HttpDelete]
+        [Route("DelDepartment")]
+        public ActionResult DelDepartment(DepartamentoDTO D)
+        {
+            var Dpto = _context
+                .Departamentos.FirstOrDefault(dept => dept.Id == D.Id);
+            if (Dpto == null) return BadRequest();
+            else
+            {
+                _context.Remove(Dpto);
+                _context.SaveChanges();
+                return Ok();
+            }
+        }
+
+
+
+
+
+
+
+
+
+
     }
+
 }
