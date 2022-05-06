@@ -29,6 +29,18 @@ namespace API.Controllers
             return Ok(_context.Departamentos.ToList());
         }
 
+        [HttpGet]
+        [Route("GetDepartmentById")]
+        public ActionResult GetDepartmentById(int Id)
+        {
+            var Dpto = _context.Departamentos.FirstOrDefault(d => d.Id == Id);
+            //var Dpto2 = _context.Departamentos.Where(d => d.Id == Id).FirstOrDefault();
+
+            if (Dpto == null) return BadRequest();
+            return Ok(Dpto);
+        }
+
+
 
         [HttpPost]
         [Route("AddDepartment")]
