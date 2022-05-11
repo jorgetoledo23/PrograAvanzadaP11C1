@@ -7,6 +7,7 @@ namespace API.Model
 
         public DbSet<Empleado> Empleados { get; set; }
         public DbSet<Departamento> Departamentos { get; set; }
+        public DbSet<Usuario> Usuarios { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -14,8 +15,10 @@ namespace API.Model
                 .SetBasePath(Directory.GetCurrentDirectory())
                 .AddJsonFile("appsettings.json")
                 .Build();
+
             var connectionString = configuration
                 .GetConnectionString("DefaultConnection");
+
             optionsBuilder.UseSqlServer(connectionString);
         }
     }
