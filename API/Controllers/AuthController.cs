@@ -1,6 +1,9 @@
 ﻿using API.Model;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.IdentityModel.Tokens;
+using System.IdentityModel.Tokens.Jwt;
+using System.Security.Claims;
 using System.Security.Cryptography;
 
 namespace API.Controllers
@@ -10,10 +13,11 @@ namespace API.Controllers
     public class AuthController : ControllerBase
     {
         private readonly AppDbContext _context;
-
-        public AuthController(AppDbContext context)
+        private readonly IConfiguration _configuration;
+        public AuthController(AppDbContext context, IConfiguration configuration)
         {
             _context = context;
+            _configuration = configuration;
         }
 
 
@@ -39,6 +43,30 @@ namespace API.Controllers
         }
 
 
+
+        [HttpPost("Login")]
+        public async Task<ActionResult<string>> Login(LoginDTO userDto)
+        {
+            var user = _context.Usuarios
+                .FirstOrDefault(u => u.Username == userDto.Username);
+            if (user == null) return BadRequest("User not found!");
+
+            if (!VerifyPassword(userDto.Password, 
+                user.PasswordHash, user.PasswordSalt))
+                return BadRequest("Bad Credentials!");
+            string Token = CreateToken(user);
+            return Ok(Token);
+
+            //Authentication
+            //Authorization
+            //Claims
+            //ClaimsIdentity
+            //ClaimsPrincipal
+        }
+
+
+
+
         private void CreatePasswordHash(string password, 
             out byte[] passwordhash, out byte[] passwordsalt)
         {
@@ -59,6 +87,27 @@ namespace API.Controllers
                     .GetBytes(password));
                 return computedHash.SequenceEqual(passwordHash);
             }
+        }
+
+        private string CreateToken(Usuario user)
+        {
+            List<Claim> claims = new List<Claim>()
+            {
+                new Claim(ClaimTypes.Name, user.Username),
+                new Claim(ClaimTypes.Role, "Free")
+            };
+
+            var key = new SymmetricSecurityKey(System.Text.Encoding.UTF8.GetBytes(
+                _configuration.GetSection("AppSettings:Token").Value));
+            var credential = new SigningCredentials(key, 
+                SecurityAlgorithms.HmacSha256Signature);
+            var token = new JwtSecurityToken(
+                claims: claims,
+                expires: DateTime.UtcNow.AddDays(1),
+                signingCredentials: credential
+                );
+            var jwt = new JwtSecurityTokenHandler().WriteToken(token);
+            return jwt;
         }
 
 

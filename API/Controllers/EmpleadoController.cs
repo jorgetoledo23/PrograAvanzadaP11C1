@@ -1,4 +1,5 @@
 ﻿using API.Model;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -7,6 +8,7 @@ namespace API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize(Roles ="Free")]
     public class EmpleadoController : ControllerBase
     {
         private readonly AppDbContext _context;
@@ -17,6 +19,7 @@ namespace API.Controllers
 
         [HttpGet]
         [Route("GetAllEmpleados")]
+        [AllowAnonymous]
         public ActionResult<List<Empleado>> GetAllEmpleados()
         {
             var Empleados = _context.Empleados.ToList();
