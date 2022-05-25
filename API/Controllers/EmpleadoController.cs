@@ -41,8 +41,6 @@ namespace API.Controllers
             return Ok();
         }
 
-
-
         [HttpPut]
         [Route("UptEmpleado")]
         public ActionResult UptEmpleado(EmpleadoDTO EmpDTO)
@@ -70,15 +68,12 @@ namespace API.Controllers
             return Ok();
         }
 
-
         [HttpGet]
         [Route("GetEmpleadosByDept")]
         public async Task<ActionResult> GetEmpleadosByDept(int id)
         {
-
             var empleados = await _context.Empleados.Where(e => e.DepartamentoId == id).ToListAsync();
             return Ok(empleados);
-
         }
 
         [HttpGet]
@@ -88,7 +83,6 @@ namespace API.Controllers
             var empleados2 = await _context.Empleados.Where(e => e.Departamento.Descripcion == Departamento).ToListAsync();
             //var empleados = await _context.Empleados.Where(e => e.DepartamentoId == id).ToListAsync();
             return Ok(empleados2);
-
         }
 
 
