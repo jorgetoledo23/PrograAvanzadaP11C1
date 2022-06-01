@@ -3,11 +3,11 @@ using WebApp.Models;
 
 namespace WebApp.Controllers
 {
-    public class MarcasController : Controller
+    public class CategoriasController : Controller
     {
         private readonly AppDbContext _context;
 
-        public MarcasController(AppDbContext context)
+        public CategoriasController(AppDbContext context)
         {
             _context = context;
         }
@@ -15,8 +15,8 @@ namespace WebApp.Controllers
         [HttpGet]
         public IActionResult Index() // Views - Marcas - Index
         {
-            var marcas = _context.tblMarcas.ToList();
-            return View(marcas);
+            var Categorias = _context.tblCategorias.ToList();
+            return View(Categorias);
         }
 
 
@@ -28,60 +28,60 @@ namespace WebApp.Controllers
 
 
         [HttpPost]
-        public IActionResult Create(Marca M)
+        public IActionResult Create(Categoria C)
         {
-            if (M == null) return View();
+            if (C == null) return View();
 
             if (ModelState.IsValid)
             {
-                _context.Add(M);
+                _context.Add(C);
                 _context.SaveChanges();
                 return RedirectToAction(nameof(Index));
             }
 
-            return View(M);
+            return View(C);
         }
 
         [HttpGet]
-        public IActionResult Edit(int IdMarca)
+        public IActionResult Edit(int IdCategoria)
         {
-            var Marca = _context.tblMarcas.FirstOrDefault(m => m.Id == IdMarca);
-            if (Marca == null) return NotFound();
+            var C = _context.tblCategorias.FirstOrDefault(m => m.Id == IdCategoria);
+            if (C == null) return NotFound();
             else
             {
-                return View(Marca);
+                return View(C);
             }
         }
 
 
         [HttpPost]
-        public async Task<IActionResult> Edit(Marca Marca)
+        public async Task<IActionResult> Edit(Categoria C)
         {
             if (ModelState.IsValid)
             {
-                _context.Update(Marca);
+                _context.Update(C);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(Marca);
+            return View(C);
         }
 
 
         [HttpGet]
-        public IActionResult Delete(int IdMarca)
+        public IActionResult Delete(int IdCategoria)
         {
-            var Marca = _context.tblMarcas.FirstOrDefault(m => m.Id == IdMarca);
-            if (Marca == null) return NotFound();
+            var C = _context.tblCategorias.FirstOrDefault(m => m.Id == IdCategoria);
+            if (C == null) return NotFound();
             else
             {
-                return View(Marca);
+                return View(C);
             }
         }
 
         [HttpPost]
-        public async Task<IActionResult> Delete(Marca Marca)
+        public async Task<IActionResult> Delete(Categoria C)
         {
-            _context.Remove(Marca);
+            _context.Remove(C);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
@@ -90,3 +90,4 @@ namespace WebApp.Controllers
 
     }
 }
+

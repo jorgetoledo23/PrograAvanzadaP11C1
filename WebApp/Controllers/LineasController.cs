@@ -3,11 +3,11 @@ using WebApp.Models;
 
 namespace WebApp.Controllers
 {
-    public class MarcasController : Controller
+    public class LineasController : Controller
     {
         private readonly AppDbContext _context;
 
-        public MarcasController(AppDbContext context)
+        public LineasController(AppDbContext context)
         {
             _context = context;
         }
@@ -15,8 +15,8 @@ namespace WebApp.Controllers
         [HttpGet]
         public IActionResult Index() // Views - Marcas - Index
         {
-            var marcas = _context.tblMarcas.ToList();
-            return View(marcas);
+            var Lineas = _context.tblLineas.ToList();
+            return View(Lineas);
         }
 
 
@@ -28,60 +28,60 @@ namespace WebApp.Controllers
 
 
         [HttpPost]
-        public IActionResult Create(Marca M)
+        public IActionResult Create(Linea L)
         {
-            if (M == null) return View();
+            if (L == null) return View();
 
             if (ModelState.IsValid)
             {
-                _context.Add(M);
+                _context.Add(L);
                 _context.SaveChanges();
                 return RedirectToAction(nameof(Index));
             }
 
-            return View(M);
+            return View(L);
         }
 
         [HttpGet]
-        public IActionResult Edit(int IdMarca)
+        public IActionResult Edit(int IdLinea)
         {
-            var Marca = _context.tblMarcas.FirstOrDefault(m => m.Id == IdMarca);
-            if (Marca == null) return NotFound();
+            var Linea = _context.tblLineas.FirstOrDefault(m => m.Id == IdLinea);
+            if (Linea == null) return NotFound();
             else
             {
-                return View(Marca);
+                return View(Linea);
             }
         }
 
 
         [HttpPost]
-        public async Task<IActionResult> Edit(Marca Marca)
+        public async Task<IActionResult> Edit(Linea Linea)
         {
             if (ModelState.IsValid)
             {
-                _context.Update(Marca);
+                _context.Update(Linea);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(Marca);
+            return View(Linea);
         }
 
 
         [HttpGet]
-        public IActionResult Delete(int IdMarca)
+        public IActionResult Delete(int IdLinea)
         {
-            var Marca = _context.tblMarcas.FirstOrDefault(m => m.Id == IdMarca);
-            if (Marca == null) return NotFound();
+            var Linea = _context.tblLineas.FirstOrDefault(m => m.Id == IdLinea);
+            if (Linea == null) return NotFound();
             else
             {
-                return View(Marca);
+                return View(Linea);
             }
         }
 
         [HttpPost]
-        public async Task<IActionResult> Delete(Marca Marca)
+        public async Task<IActionResult> Delete(Linea Linea)
         {
-            _context.Remove(Marca);
+            _context.Remove(Linea);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
@@ -90,3 +90,4 @@ namespace WebApp.Controllers
 
     }
 }
+

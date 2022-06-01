@@ -1,0 +1,44 @@
+﻿@model List<Categoria>
+
+@{
+    ViewData["Title"] = "Administracion de Categoria";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Administracion de Categorias</h1>
+
+<p>
+    <a class="btn btn-outline-danger" 
+    asp-controller="Categorias"
+    asp-action="Create">Crear Nueva Categoria</a>
+</p>
+
+<hr />
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Nombre</th>
+            <th>Descripcion</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Descripcion)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-IdCategoria="@item.Id"><i class="fa-solid fa-pen-to-square me-2"></i></a>
+                <a asp-action="Details" asp-route-id="@item.Id"><i class="fa-solid fa-circle-info me-2"></i></a>
+                <a asp-action="Delete" asp-route-IdCategoria="@item.Id"><i class="fa-solid fa-trash me-2"></i></a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
