@@ -1,0 +1,109 @@
+﻿@model WebApp.Models.Equipo
+
+@{
+    ViewData["Title"] = "Creacion de Equipos";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="card text-center">
+    <div class="card-header">
+        Creacion de Equipos
+    </div>
+    <div class="card-body">
+        <a asp-action="Index"
+           class="btn btn-outline-primary"><i class="fa-solid fa-user-plus me-2"></i>Volver al Listado de Equipos</a>
+    </div>
+</div>
+<div class="row mt-3">
+    <div class="row">
+        <form class="row justify-content-evenly" asp-action="CrearEquipo" method="post" enctype="multipart/form-data">
+
+
+
+            <div class="col-md-3">
+                <div class="form-group m-2">
+                    <input asp-for="Descripcion" class="form-control" placeholder="Descripcion" />
+                    <span asp-validation-for="Descripcion" class="text-danger"></span>
+                </div>
+                <div class="form-group m-2">
+                    <input asp-for="DescripcionLarga" class="form-control" placeholder="Detalles" />
+                    <span asp-validation-for="DescripcionLarga" class="text-danger"></span>
+                </div>
+                <div class="form-group m-2">
+                    <input asp-for="Ram" class="form-control" placeholder="Memoria Ram" />
+                    <span asp-validation-for="Ram" class="text-danger"></span>
+                </div>
+                <div class="form-group m-2">
+                    <input asp-for="Procesador" class="form-control" placeholder="Procesador" />
+                    <span asp-validation-for="Procesador" class="text-danger"></span>
+                </div>
+                <div class="form-group m-2">
+                    <input asp-for="DiscoDuroHDD" class="form-control" placeholder="Disco Duro HDD" />
+                    <span asp-validation-for="DiscoDuroHDD" class="text-danger"></span>
+                </div>
+                <div class="form-group m-2">
+                    <input asp-for="DiscoDuroSSD" class="form-control" placeholder="Disco Solido SSD" />
+                    <span asp-validation-for="DiscoDuroSSD" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="col-md-3">
+                <div class="form-group form-check">
+                    <label class="form-check-label">
+                        <input class="form-check-input" asp-for="GPUIntegrada" /> Gpu Integrada
+                    </label>
+                </div>
+                <div class="form-group form-check">
+                    <label class="form-check-label">
+                        <input class="form-check-input" asp-for="GPUDedicada" /> Gpu Dedicada
+                    </label>
+                </div>
+                <div class="form-group m-2">
+                    <input asp-for="GPUDedicadaName" class="form-control" placeholder="Modelo GPU Dedicada" />
+                    <span asp-validation-for="GPUDedicadaName" class="text-danger"></span>
+                </div>
+
+                <div class="form-group m-2">
+                    <input asp-for="HzPantalla" class="form-control" placeholder="Hz Pantalla" />
+                    <span asp-validation-for="HzPantalla" class="text-danger"></span>
+                </div>
+                <div class="form-group m-2">
+                    <input asp-for="InPantalla" class="form-control" placeholder="Tamaño Pantalla" />
+                    <span asp-validation-for="InPantalla" class="text-danger"></span>
+                </div>
+            </div>
+
+
+
+            <div class="col-md-3">
+                <div class="mb-3">
+                  <label for="formFile" class="form-label">Imagen Equipo</label>
+                  <input class="form-control" asp-for="ImagenFile" id="formFile">
+                </div>
+
+                <div class="form-group m-2">
+                    <label class="control-label">Marca</label>
+                    <select asp-for="MarcaId" class="form-select" asp-items="ViewBag.Marcas"></select>
+                </div>
+                <div class="form-group m-2">
+                    <label class="control-label">Linea</label>
+                    <select asp-for="LineaId" class="form-select" asp-items="ViewBag.Lineas"></select>
+                </div>
+                <div class="form-group m-2">
+                    <label class="control-label">Categoria</label>
+                    <select asp-for="CategoriaId" class="form-select" asp-items="ViewBag.Categorias"></select>
+                </div>
+                <div class="form-group mt-2">
+                    <input type="submit" value="Crear Equipo" class="btn btn-primary col-12" />
+                </div>
+            </div>
+
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+    await Html.RenderPartialAsync("_ValidationScriptsPartial");
+}
+}
