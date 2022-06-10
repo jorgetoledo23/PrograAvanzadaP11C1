@@ -11,66 +11,31 @@
     </div>
     <div class="card-body">
         <a asp-action="CrearEquipo"
-        class="btn btn-outline-primary"><i class="fa-solid fa-user-plus me-2"></i>Agregar Nuevo Equipo</a>
+           class="btn btn-outline-primary"><i class="fa-solid fa-user-plus me-2"></i>Agregar Nuevo Equipo</a>
     </div>
 </div>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                Descripcion
-            </th>
-            <th>
-                Ram
-            </th>
-            <th>
-                Procesador
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.InPantalla)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Marca)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Linea)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Categoria)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Descripcion)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Ram)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Procesador)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.InPantalla)
-            </td>
-            <td>
-                @item.Marca.Name
-            </td>
-            <td>
-                @item.Linea.Name
-            </td>
-            <td>
-                @item.Categoria.Name
-            </td>
-            <td>
+
+<div class="row justify-content-evenly mt-3">
+
+
+
+@foreach (var item in Model)
+{
+
+
+    <div class="col-lg-3 text-center">
+        <div class="card p-3">
+            <img class="img-fluid" src="~/img/@item.ImagenUrl" />
+            <div class="card-body">
+                <h5 class="card-title">@item.Descripcion</h5>
+                <p class="card-text">@item.DescripcionLarga</p>
                 <a asp-action="Edit" asp-route-IdLinea="@item.Id"><i class="fa-solid fa-pen-to-square me-2"></i></a>
                 <a asp-action="Details" asp-route-id="@item.Id"><i class="fa-solid fa-circle-info me-2"></i></a>
                 <a asp-action="Delete" asp-route-IdLinea="@item.Id"><i class="fa-solid fa-trash me-2"></i></a>
-            </td>
-        </tr>
+            </div>
+        </div>
+    </div>
+
+
 }
-    </tbody>
-</table>
+</div>
