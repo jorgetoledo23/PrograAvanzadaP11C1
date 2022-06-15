@@ -5,8 +5,16 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h4>Modifique la Informacion de la Marca</h4>
-<hr />
+
+<div class="card text-center">
+    <div class="card-header">
+        Editando Marca <strong>@Model.Name</strong>
+    </div>
+    <div class="card-body">
+        <a asp-action="Index"
+           class="btn btn-outline-primary"><i class="fa-solid fa-copyright me-2"></i>Volver al Listado de Marcas</a>
+    </div>
+</div>
 <div class="row">
     <div class="col-md-4">
         <form asp-action="Edit" method="post">
@@ -25,10 +33,6 @@
             </div>
         </form>
     </div>
-</div>
-
-<div class="mt-5">
-    <a class="btn btn-outline-danger" asp-action="Index">Regresar al Listado</a>
 </div>
 
 @section Scripts {

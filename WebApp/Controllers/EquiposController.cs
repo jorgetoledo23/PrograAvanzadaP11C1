@@ -64,6 +64,54 @@ namespace WebApp.Controllers
             }
         }
 
+        [HttpGet]
+        public async Task<IActionResult> Delete(int Id)
+        {
+            var E = _context.tblEquipos.Find(Id);
+            if (E == null) return NotFound();
+            _context.Remove(E);
+            await _context.SaveChangesAsync();
+            return RedirectToAction(nameof(Index));
+        }
+
+
+
+        public async Task<IActionResult> Edit(int Id)
+        {
+            var E = await _context.tblEquipos.FindAsync(Id);
+            if(E == null) return NotFound();
+            return View(E);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Edit(Equipo E)
+        {
+            if (ModelState.IsValid)
+            {
+                if (E.ImagenFile == null) E.ImagenUrl = "no-disponible.png";
+                else
+                {
+                    string wwwRootPath = _environment.WebRootPath;
+                    string fileName = Path.GetFileNameWithoutExtension(E.ImagenFile.FileName);
+                    string extension = Path.GetExtension(E.ImagenFile.FileName);
+                    E.ImagenUrl = fileName + DateTime.Now.ToString("ddMMyyyyHHmmss") + extension; //foto08062022131545.png 
+
+                    string path = Path.Combine(wwwRootPath + "/img/" + E.ImagenUrl);
+
+                    using (var fileStream = new FileStream(path, FileMode.Create))
+                    {
+                        await E.ImagenFile.CopyToAsync(fileStream);
+                    }
+                }
+                _context.Update(E);
+                await _context.SaveChangesAsync();
+                return RedirectToAction(nameof(Index));
+            }
+            return View(E);
+        }
+
+
+
 
     }
 }

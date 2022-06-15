@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using WebApp.Models;
+using WebApp.ViewModels;
 
 namespace WebApp.Controllers
 {
@@ -16,7 +17,10 @@ namespace WebApp.Controllers
         public IActionResult Index() // Views - Marcas - Index
         {
             var Lineas = _context.tblLineas.ToList();
-            return View(Lineas);
+
+            CreateLineaViewModel Clvm = new CreateLineaViewModel();
+            Clvm.Lineas = Lineas;
+            return View(Clvm);
         }
 
 
@@ -28,7 +32,7 @@ namespace WebApp.Controllers
 
 
         [HttpPost]
-        public IActionResult Create(Linea L)
+        public IActionResult Create([Bind(Prefix = "Linea")] Linea L)
         {
             if (L == null) return View();
 

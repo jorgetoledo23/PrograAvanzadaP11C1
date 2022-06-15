@@ -1,12 +1,19 @@
 ﻿@model Categoria
 
 @{
-    ViewData["Title"] = "Crear Marca";
+    ViewData["Title"] = "Crear Catergorias";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h4>Ingrese Informacion de la Categoria</h4>
-<hr />
+<div class="card text-center">
+    <div class="card-header">
+        Creacion de Categorias
+    </div>
+    <div class="card-body">
+        <a asp-action="Index"
+           class="btn btn-outline-primary"><i class="fa-solid fa-list me-2"></i>Volver al Listado de Categorias</a>
+    </div>
+</div>
 <div class="row">
     <div class="col-md-4">
         <form asp-action="Create" method="post">

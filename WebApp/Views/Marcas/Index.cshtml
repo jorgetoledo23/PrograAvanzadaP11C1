@@ -5,15 +5,15 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>Administracion de Marcas</h1>
-
-<p>
-    <a class="btn btn-outline-danger" 
-    asp-controller="Marcas"
-    asp-action="Create">Crear Nueva Marca</a>
-</p>
-
-<hr />
+<div class="card text-center">
+    <div class="card-header">
+        Administracion de Marcas
+    </div>
+    <div class="card-body">
+        <a asp-action="Create"
+           class="btn btn-outline-primary"><i class="fa-solid fa-copyright me-2"></i>Agregar Nueva Marca</a>
+    </div>
+</div>
 
 <table class="table">
     <thead>

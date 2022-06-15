@@ -4,16 +4,15 @@
     ViewData["Title"] = "Administracion de Categoria";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
-<h1>Administracion de Categorias</h1>
-
-<p>
-    <a class="btn btn-outline-danger" 
-    asp-controller="Categorias"
-    asp-action="Create">Crear Nueva Categoria</a>
-</p>
-
-<hr />
+<div class="card text-center">
+    <div class="card-header">
+        Administracion de Categorias
+    </div>
+    <div class="card-body">
+        <a asp-action="Create"
+           class="btn btn-outline-primary"><i class="fa-solid fa-list me-2"></i>Agregar Nueva Categoria</a>
+    </div>
+</div>
 
 <table class="table">
     <thead>

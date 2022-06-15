@@ -5,8 +5,15 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h4>Ingrese Informacion de la Marca</h4>
-<hr />
+<div class="card text-center">
+    <div class="card-header">
+        Creacion de Marcas
+    </div>
+    <div class="card-body">
+        <a asp-action="Index"
+           class="btn btn-outline-primary"><i class="fa-solid fa-copyright me-2"></i>Volver al Listado de Marcas</a>
+    </div>
+</div>
 <div class="row">
     <div class="col-md-4">
         <form asp-action="Create" method="post">
