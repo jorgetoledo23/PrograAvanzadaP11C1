@@ -1,4 +1,4 @@
-﻿@model IEnumerable<WebApp.Models.Equipo>
+﻿@model EquipoIndexViewModel
 
 @{
     ViewData["Title"] = "Administracion de Equipos";
@@ -13,26 +13,67 @@
         <a asp-action="CrearEquipo"
            class="btn btn-outline-primary"><i class="fa-solid fa-laptop me-2"></i>Agregar Nuevo Equipo</a>
     </div>
+    <div class="card-body">
+        <a class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#filterModal"><i class="fa-solid fa-filter me-2"></i>Filtrar Equipos</a>
+    </div>
 </div>
 
 <div class="row justify-content-evenly mt-3">
 
-
-
-@foreach (var item in Model)
-{
-    <div class="col-lg-3 text-center">
-        <div class="card p-3">
-            <img class="img-fluid" src="~/img/@item.ImagenUrl" />
-            <div class="card-body">
-                <h5 class="card-title">@item.Descripcion</h5>
-                <p class="card-text">@item.DescripcionLarga</p>
-                <a asp-action="Edit" asp-route-IdLinea="@item.Id"><i class="fa-solid fa-pen-to-square me-2"></i></a>
-                <a asp-action="Details" asp-route-id="@item.Id"><i class="fa-solid fa-circle-info me-2"></i></a>
-                <a asp-action="Delete" asp-route-Id="@item.Id" onclick="return confirm('¿Estas Seguro?')">
-                <i class="fa-solid fa-trash me-2"></i></a>
-            </div>
-        </div>-
-    </div>
-}
+    @foreach (var item in Model.Equipos)
+    {
+        <div class="col-lg-3 text-center">
+            <div class="card p-3">
+                <img class="img-fluid" src="~/img/@item.ImagenUrl" />
+                <div class="card-body">
+                    <h5 class="card-title">@item.Descripcion</h5>
+                    <p class="card-text">@item.DescripcionLarga</p>
+                    <a asp-action="Edit" asp-route-IdLinea="@item.Id"><i class="fa-solid fa-pen-to-square me-2"></i></a>
+                    <a asp-action="Details" asp-route-id="@item.Id"><i class="fa-solid fa-circle-info me-2"></i></a>
+                    <a asp-action="Delete" asp-route-Id="@item.Id" onclick="return confirm('¿Estas Seguro?')">
+                        <i class="fa-solid fa-trash me-2"></i>
+                    </a>
+                </div>
+            </div>-
+        </div>
+    }
 </div>
+
+
+<!-- Modal -->
+<div class="modal fade" id="filterModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content m-3 p-3">
+            <form asp-action="Index" method="get" class="row justify-content-evenly md-2 p-2">
+                <div class="col-6">
+                    <div class="form-group m-2">
+                        <input class="form-control" asp-for="PalabraClave" type="text" placeholder="Palabra Clave" />
+                    </div>
+                    <div class="form-group m-2">
+                        <select class="form-select" asp-items="ViewBag.Marcas">
+                            <option>Marca...</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div class="form-group m-2">
+                        <select class="form-select" asp-items="ViewBag.Lineas">
+                            <option>Linea...</option>
+                        </select>
+                    </div>
+                    <div class="form-group m-2">
+                        <select class="form-select" asp-items="ViewBag.Categorias">
+                            <option>Categoria...</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group m-2">
+                    <label class="control-label"></label>
+                    <button type="submit" class="btn btn-primary col-12">Filtrar</button>
+                </div>
+
+            </form>
+        </div>
+    </div>
+</div>
+

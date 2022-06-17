@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using WebApp.Models;
+using WebApp.ViewModels;
 
 namespace WebApp.Controllers
 {
@@ -15,15 +16,34 @@ namespace WebApp.Controllers
             _context = context;
             _environment = environment;
         }
-        public IActionResult Index()
+        public IActionResult Index(int marca, int linea, int cat, string palabraClave)
         {
-            var Equipos = _context.tblEquipos
+            List<Equipo> Equipos = new List<Equipo>();
+            Equipos = _context.tblEquipos
                 .Include(e => e.Marca)
                 .Include(e => e.Linea)
                 .Include(e => e.Categoria)
                 .ToList();
 
-            return View(Equipos);
+            if (marca == 0 && linea == 0 && cat == 0 && palabraClave != null)
+            {
+                //Filtrar por palabra clave
+                Equipos = _context.tblEquipos
+                    .Where(x => x.Descripcion.Contains(palabraClave) || x.DescripcionLarga.Contains(palabraClave))
+                .Include(e => e.Marca)
+                .Include(e => e.Linea)
+                .Include(e => e.Categoria)
+                .ToList();
+            }
+
+            ViewData["Marcas"] = new SelectList(_context.tblMarcas.ToList(), "Id", "Name");
+            ViewData["Lineas"] = new SelectList(_context.tblLineas.ToList(), "Id", "Name");
+            ViewData["Categorias"] = new SelectList(_context.tblCategorias.ToList(), "Id", "Name");
+
+            EquipoIndexViewModel Eivm = new EquipoIndexViewModel();
+            Eivm.Equipos = Equipos;
+
+            return View(Eivm);
         }
 
         public IActionResult CrearEquipo()
